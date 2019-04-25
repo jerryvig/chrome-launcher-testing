@@ -1,0 +1,27 @@
+{
+  "name": "chrome-launcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chrome-launcher.js",
+  "dependencies": {
+    "chromedriver": "^74.0.0",
+    "selenium-standalone": "^6.16.0",
+    "wdio-selenium-standalone-service": "0.0.12",
+    "webdriver": "^5.7.15",
+    "webdriverio": "^5.7.15"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerryvig/chrome-launcher-testing.git"
+  },
+  "author": "Jerry Vigil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jerryvig/chrome-launcher-testing/issues"
+  },
+  "homepage": "https://github.com/jerryvig/chrome-launcher-testing#readme"
+}

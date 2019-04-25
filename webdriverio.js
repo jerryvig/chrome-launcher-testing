@@ -11,24 +11,26 @@ chromedriver.start([
 
 (async() => {
     const opts = {
+        host: 'localhost',
+        port: PORT,
         logLevel: 'error',
         path: '/',
         capabilities: {
             browserName: 'chrome',
-            chromeOptions: {args: ['--headless']}
+            //chromeOptions: {args: ['--headless']}
         }
     };
 
-    const browser = webdriverio.remote(opts);
+   const browser = await webdriverio.remote(opts);
 
-    console.log( 'keys = ' + JSON.stringify(Object.keys(browser)) );
+    //console.log( 'keys = ' + JSON.stringify(Object.keys(browser)) );
 
-    await browser.url('https://www.chromestatus.com/');
+    // await browser.url('https://www.chromestatus.com/features');
 
-    const title = await browser.getTitle();
-    console.log(`Title: ${title}`);
+    //const title = await browser.getTitle();
+    //console.log(`Title: ${title}`);
 
-    await browser.waitForText('.num-features', 3000);
+   /*  await browser.waitForText('.num-features', 3000);
     let numFeatures = await browser.getText('.num-features');
     console.log(`Chrome has ${numFeatures} total features`);
 
@@ -40,8 +42,8 @@ chromedriver.start([
     console.log(`Chrome has ${numFeatures} CSS features`);
 
     const buffer = await browser.saveScreenshot('screenshot.png');
-    console.log('Saved screenshot...');
+    console.log('Saved screenshot...'); */
 
     chromedriver.stop();
-    browser.end();
+    //browser.end();
 })();
