@@ -11,7 +11,7 @@ const driver = new webdriver.Builder()
     .build();
 
 (async function() {
-    await driver.get('https://www.instagram.com/');
+    await driver.get('https://www.linkedin.com/');
 
     await driver.takeScreenshot().then(base64png => {
        fs.writeFileSync('screenshot.png', new Buffer(base64png, 'base64'));
