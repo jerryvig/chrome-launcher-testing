@@ -1,15 +1,17 @@
 from selenium import webdriver
 
-options = webdriver.ChromeOptions()
-options.binary_location = '/usr/bin/google-chrome-unstable'
-options.add_argument('headless')
-options.add_argument("user-data-dir=/home/jerry/.config/google-chrome-unstable/Default")
+#options = webdriver.ChromeOptions()#
+#options.binary_location = '/usr/bin/google-chrome-unstable'
+# options.add_argument('headless')
+#options.add_argument("user-data-dir=/home/jerry/.config/google-chrome-unstable/Default")
 
-driver = webdriver.Chrome(options=options)
+#driver = webdriver.Chrome(options=options)
+profile = webdriver.FirefoxProfile('/home/jerry/.mozilla/firefox/huqgok2n.default')
+driver = webdriver.Firefox(profile)
 
 driver.get('https://www.linkedin.com/feed/')
 
-driver.implicitly_wait(10)
+driver.implicitly_wait(14)
 
 ##sign_in_buttons = driver.find_elements_by_css_selector('a[class=nav__button-secondary]')
 ##for button in sign_in_buttons:
@@ -29,7 +31,7 @@ driver.implicitly_wait(4)
 #password.send_keys('XXXXXXX')
 #sign_in_button.click()
 
-driver.implicitly_wait(4)
+# driver.implicitly_wait(4)
 
 driver.get_screenshot_as_file('linkedin.png')
 
@@ -38,4 +40,7 @@ driver.get_screenshot_as_file('linkedin.png')
 
 # import code
 # code.interact(local=locals())
+
+driver.quit()
+
 
