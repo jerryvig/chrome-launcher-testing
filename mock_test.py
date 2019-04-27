@@ -16,16 +16,11 @@ linkedin_routes_map = {
     'jobs-search': ['https://www.linkedin.com/jobs/search/', 'linkedin-jobs-search.png'],
 }
 
-def run_routes(profile, opts):
-    driver = webdriver.Firefox(profile, options=opts)
-    driver.implicitly_wait(DEFAULT_WAIT)
-
+def run_routes(driver):
     for route in linkedin_routes_map:
         driver.get(linkedin_routes_map[route][0])
         time.sleep(DEFAULT_WAIT)
         driver.get_screenshot_as_file(linkedin_routes_map[route][1])
-
-    driver.quit()
 
 def main():
     random.seed()
@@ -33,11 +28,16 @@ def main():
     opts = options.Options()
     opts.headless = True
 
+    driver = webdriver.Firefox(profile, options=opts)
+    driver.implicitly_wait(DEFAULT_WAIT)
+
     # run indefinitely
     while True:
-        run_routes(profile, opts)
+        run_routes(driver)
         sleep_range = random.randint(-60, 60)
         time.sleep(SLEEP_BASE + sleep_range)
+
+    driver.quit()
 
 if __name__ == '__main__':
     main()
