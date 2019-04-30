@@ -4,7 +4,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.firefox import options
 
-SLEEP_BASE = 180
+SLEEP_BASE = 1200
 DEFAULT_WAIT = 8
 
 linkedin_routes_map = {
@@ -16,11 +16,16 @@ linkedin_routes_map = {
     'jobs-search': ['https://www.linkedin.com/jobs/search/', 'linkedin-jobs-search.png'],
 }
 
-def run_routes(driver):
+def run_routes(profile, opts):
+    driver = webdriver.Firefox(profile, options=opts)
+    driver.implicitly_wait(DEFAULT_WAIT)
+
     for route in linkedin_routes_map:
         driver.get(linkedin_routes_map[route][0])
         time.sleep(DEFAULT_WAIT)
         driver.get_screenshot_as_file(linkedin_routes_map[route][1])
+
+    driver.close()
 
 def main():
     random.seed()
@@ -28,16 +33,17 @@ def main():
     opts = options.Options()
     opts.headless = True
 
-    driver = webdriver.Firefox(profile, options=opts)
-    driver.implicitly_wait(DEFAULT_WAIT)
+    # driver = webdriver.Firefox(profile, options=opts)
+    # driver.implicitly_wait(DEFAULT_WAIT)
 
     # run indefinitely
     while True:
-        run_routes(driver)
+        run_routes(profile, opts)
         sleep_range = random.randint(-60, 60)
+        print('Sleeping %d s.' % (SLEEP_BASE + sleep_range))
         time.sleep(SLEEP_BASE + sleep_range)
 
-    driver.quit()
+    # driver.quit()
 
 if __name__ == '__main__':
     main()
