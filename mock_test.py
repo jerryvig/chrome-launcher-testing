@@ -2,9 +2,10 @@ import random
 import time
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.firefox import options
 
-SLEEP_BASE = 1200
+SLEEP_BASE = 300
 DEFAULT_WAIT = 8
 
 linkedin_routes_map = {
@@ -23,6 +24,25 @@ def run_routes(profile, opts):
     for route in linkedin_routes_map:
         driver.get(linkedin_routes_map[route][0])
         time.sleep(DEFAULT_WAIT)
+        if route == 'jobs-search':
+            job_search_input = driver.find_element_by_id('jobs-search-box-keyword-id-ember93')
+            job_search_input.send_keys('python javascript')
+            location_search_input = driver.find_element_by_id('jobs-search-box-location-id-ember93')
+            location_search_input.send_keys(Keys.BACKSPACE * 13)
+            location_search_input.send_keys('Austin, Texas')
+            search_button = driver.find_element_by_css_selector('button[data-ember-action-99="99"]')
+            search_button.click()
+            time.sleep(DEFAULT_WAIT)
+
+            job_search_input.send_keys(Keys.BACKSPACE * 17)
+            job_search_input.send_keys('c++ python')
+            search_button.click()
+            time.sleep(DEFAULT_WAIT)
+
+            job_search_input.send_keys(Keys.BACKSPACE * 10)
+            job_search_input.send_keys('python docker')
+            search_button.click()
+            time.sleep(DEFAULT_WAIT)
         driver.get_screenshot_as_file(linkedin_routes_map[route][1])
 
     driver.close()
@@ -32,9 +52,6 @@ def main():
     profile = webdriver.FirefoxProfile('/home/jerry/.mozilla/firefox/huqgok2n.default')
     opts = options.Options()
     opts.headless = True
-
-    # driver = webdriver.Firefox(profile, options=opts)
-    # driver.implicitly_wait(DEFAULT_WAIT)
 
     # run indefinitely
     while True:
